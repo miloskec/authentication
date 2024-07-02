@@ -1,4 +1,3 @@
-```markdown
 # Authentication Microservice
 
 ## Setup Instructions
