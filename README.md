@@ -1,3 +1,38 @@
+```markdown
+# Authentication Microservice
+
+## Setup Instructions
+
+1. Navigate to the authentication directory:
+    ```sh
+    cd authentication
+    ```
+2. Start the authentication service:
+    ```sh
+    docker-compose up -d
+    ```
+3. Run migrations:
+    ```sh
+    sail artisan migrate
+    ```
+4. Start the queue worker:
+    ```sh
+    sail artisan queue:work
+    ```
+
+## Environment Configuration
+
+Copy the content from the `.env.example` to the `.env` file and configure the environment variables as needed.
+
+## Additional Commands
+
+To stop the service:
+```sh
+docker-compose down
+```
+ 
+  
+   
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">
