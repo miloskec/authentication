@@ -9,9 +9,11 @@ use App\Http\Requests\PasswordResetRequest;
 use App\Http\Requests\UserLoginRequest;
 use App\Http\Requests\UserRegisterRequest;
 use App\Http\Requests\VerifyTokenRequest;
+use App\Http\Resources\BaseResource;
 use App\Http\Resources\UserLoginResource;
 use App\Http\Resources\UserResource;
 use App\Services\AuthService;
+use Illuminate\Http\Request as HttpRequest;
 use Illuminate\Support\Facades\Log;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
@@ -32,6 +34,11 @@ class AuthController extends Controller
     public function login(UserLoginRequest $request)
     {
         return new UserLoginResource($this->authService->login($request->validated()));
+    }
+
+    public function logout(VerifyTokenRequest $request)
+    {
+        return $this->authService->logout($request->token);
     }
 
     public function verifyJWT(VerifyTokenRequest $request)
@@ -61,6 +68,6 @@ class AuthController extends Controller
 
     public function refresh(VerifyTokenRequest $request)
     {
-        return $this->authService->refreshJWT($request->token);
+        return new UserLoginResource($this->authService->refreshJWT($request->token));
     }
 }

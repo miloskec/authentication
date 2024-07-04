@@ -22,7 +22,7 @@ class AuthService
             'password_hash' => Hash::make($data['password']),
         ];
 
-        if(isset($data['is_admin'])) {
+        if (isset($data['is_admin'])) {
             $user['is_admin'] = $data['is_admin'];
         }
 
@@ -44,6 +44,16 @@ class AuthService
         }
 
         return auth()->user();
+    }
+
+    public function logout()
+    {
+        try {
+            JWTAuth::invalidate(JWTAuth::getToken());
+            return array(['message' => 'Successfully logged out']);
+        } catch (\Tymon\JWTAuth\Exceptions\JWTException $e) {
+            return array(['error' => 'Failed to logout, please try again.']);
+        }
     }
 
     public function verify(string $token)
@@ -119,7 +129,9 @@ class AuthService
 
     public function refreshJWT(string $token)
     {
+        JWTAuth::setToken($token);
+        $user = JWTAuth::authenticate();
         // Refresh JWT
-        return $token;
+        return $user;
     }
 }
