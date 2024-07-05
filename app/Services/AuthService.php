@@ -118,13 +118,18 @@ class AuthService
         return $email;
     }
 
-    public function resetPassword(string $token, string $password)
+    public function resetPassword(string $token, string $password, string $current_password)
     {
-        // Reset user password
-        return array(
-            $token,
-            $password
-        );
+        JWTAuth::setToken($token);
+        $user = JWTAuth::authenticate();
+        //generate code to check if $current_password is equal to the current user password in the database
+        if(Hash::check($current_password, $user->password_hash)) {
+            $user->password_hash = Hash::make($password);
+            $user->save();
+            // Reset user password
+            return $user;    
+        }
+        throw new AuthenticationException('Wrong current password');
     }
 
     public function refreshJWT(string $token)

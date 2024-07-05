@@ -8,11 +8,16 @@ use App\Http\Controllers\AuthController;
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
 
+Route::get('/health', function () {
+    return response()->json(['status' => 'OK'], 200);
+});
+
 Route::middleware('auth:api')->group(function () {
     Route::post('/verify-jwt', [AuthController::class, 'verifyJWT']);
     Route::post('/get-user-by-id-and-verify-jwt', [AuthController::class, 'getUserByIdAndVerifyJWTRequest']);
     Route::post('/refresh-token', [AuthController::class, 'refresh']);
     Route::post('/logout', [AuthController::class, 'logout']);
+    Route::post('/reset-password', [AuthController::class, 'resetPassword']);
     /** 
      * TODO: Implement the following routes
      * Route::post('/verify', [AuthController::class, 'verify']);
@@ -20,3 +25,4 @@ Route::middleware('auth:api')->group(function () {
      * Route::post('/reset-password', [AuthController::class, 'resetPassword']);
      */
 });
+
