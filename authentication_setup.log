@@ -12,3 +12,9 @@
   2024-07-06 16:11:52 App\Mail\PasswordReset ......................... 1s DONE
   2024-07-06 16:16:03 App\Mail\PasswordReset ......................... RUNNING
   2024-07-06 16:16:05 App\Mail\PasswordReset ......................... 2s DONE
+  2024-07-06 17:00:41 App\Mail\PasswordReset ......................... RUNNING
+  2024-07-06 17:00:43 App\Mail\PasswordReset ......................... 1s DONE
+  2024-07-06 17:01:13 App\Mail\PasswordReset ......................... RUNNING
+  2024-07-06 17:01:13 App\Mail\PasswordReset ................... 499.73ms DONE
+  2024-07-06 17:01:44 App\Mail\PasswordReset ......................... RUNNING
+  2024-07-06 17:01:44 App\Mail\PasswordReset ................... 510.13ms DONE

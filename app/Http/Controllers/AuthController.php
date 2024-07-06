@@ -59,13 +59,12 @@ class AuthController extends Controller
 
     public function passwordRecovery(PasswordRecoveryRequest $request)
     {
-        // In development environment, send token back
         // In production, send email with a token
         if (config('app.env') === 'production') {
-            // Send email
             $this->authService->sendPasswordRecoveryEmail($request->email);
             return (new PasswordRecoveryEmailSentResource(true))->withoutDataWrapper();
         }
+        // In development environment, send token back
         return new PasswordRecoveryResource($this->authService->passwordRecovery($request->email));
     }
 
