@@ -6,12 +6,17 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\GetUserByIdAndVerifyJWTToken;
 use App\Http\Requests\PasswordRecoveryRequest;
 use App\Http\Requests\PasswordResetRequest;
+use App\Http\Requests\PasswordResetWithTokenRequest;
 use App\Http\Requests\UserLoginRequest;
 use App\Http\Requests\UserRegisterRequest;
 use App\Http\Requests\VerifyTokenRequest;
+use App\Http\Resources\PasswordRecoveryEmailSentResource;
+use App\Http\Resources\PasswordRecoveryResource;
+use App\Http\Resources\PasswordRecoverySuccessResource;
 use App\Http\Resources\UserLoginResource;
 use App\Http\Resources\UserResource;
 use App\Services\AuthService;
+use Illuminate\Http\Resources\Json\JsonResource;
 
 class AuthController extends Controller
 {
@@ -54,7 +59,20 @@ class AuthController extends Controller
 
     public function passwordRecovery(PasswordRecoveryRequest $request)
     {
-        return $this->authService->passwordRecovery($request->email);
+        // In development environment, send token back
+        // In production, send email with a token
+        if (config('app.env') === 'production') {
+            // Send email
+            $this->authService->sendPasswordRecoveryEmail($request->email);
+            return (new PasswordRecoveryEmailSentResource(true))->withoutDataWrapper();
+        }
+        return new PasswordRecoveryResource($this->authService->passwordRecovery($request->email));
+    }
+
+    public function resetPasswordWithToken(PasswordResetWithTokenRequest $request)
+    {
+        //The rest_token check is performed in the PasswordResetWithTokenRequest
+        return (new PasswordRecoverySuccessResource($this->authService->resetPasswordWithToken($request->email, $request->password)))->withoutDataWrapper();
     }
 
     public function resetPassword(PasswordResetRequest $request)

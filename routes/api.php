@@ -7,6 +7,8 @@ use App\Http\Controllers\AuthController;
 
 Route::post('/login', [AuthController::class, 'login']);
 Route::post('/register', [AuthController::class, 'register']);
+Route::post('/password-recovery', [AuthController::class, 'passwordRecovery']);
+Route::post('/reset-password-token', [AuthController::class, 'resetPasswordWithToken']);
 
 Route::get('/health', function () {
     return response()->json(['status' => 'OK'], 200);

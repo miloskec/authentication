@@ -9,7 +9,9 @@ use App\Notifications\WelcomeEmailNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
 use Tymon\JWTAuth\Contracts\JWTSubject;
+use Illuminate\Support\Str;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -77,5 +79,17 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    // Example method to create a password reset token
+    public function createPasswordResetToken()
+    {
+        $token = Str::random(60);
+        DB::table('password_resets')->insert([
+            'email' => $this->email,
+            'token' => $token,
+            'created_at' => now(),
+        ]);
+        return $token;
     }
 }
