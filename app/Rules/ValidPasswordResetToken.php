@@ -14,7 +14,7 @@ class ValidPasswordResetToken implements ValidationRule
     /**
      * Create a new rule instance.
      *
-     * @param string $email
+     * @param  string  $email
      * @return void
      */
     public function __construct($email)
@@ -34,8 +34,9 @@ class ValidPasswordResetToken implements ValidationRule
             ->where('token', $value)
             ->first();
 
-        if (!$passwordReset) {
+        if (! $passwordReset) {
             $fail('The provided password reset token is invalid.');
+
             return;
         }
 

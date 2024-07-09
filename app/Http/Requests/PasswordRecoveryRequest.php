@@ -26,4 +26,16 @@ class PasswordRecoveryRequest extends FormRequest
             'email' => 'required|email|exists:users,email',
         ];
     }
+
+    /**
+     * Get the error messages for the defined validation rules.
+     *
+     * @return array<string, string>
+     */
+    public function messages(): array
+    {
+        return [
+            'email.exists' => 'Please check your data before submitting.',
+        ];
+    }
 }

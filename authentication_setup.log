@@ -18,3 +18,11 @@
   2024-07-06 17:01:13 App\Mail\PasswordReset ................... 499.73ms DONE
   2024-07-06 17:01:44 App\Mail\PasswordReset ......................... RUNNING
   2024-07-06 17:01:44 App\Mail\PasswordReset ................... 510.13ms DONE
+  2024-07-09 13:21:39 App\Notifications\WelcomeEmailNotification ..... RUNNING
+  2024-07-09 13:21:41 App\Notifications\WelcomeEmailNotification ..... 2s DONE
+  2024-07-09 13:21:41 App\Notifications\UserCreatedKafkaNotification . RUNNING
+  2024-07-09 13:21:41 App\Notifications\UserCreatedKafkaNotification  58.01ms DONE
+  2024-07-09 13:24:53 App\Notifications\WelcomeEmailNotification ..... RUNNING
+  2024-07-09 13:24:55 App\Notifications\WelcomeEmailNotification ..... 2s DONE
+  2024-07-09 13:24:55 App\Notifications\UserCreatedKafkaNotification . RUNNING
+  2024-07-09 13:24:55 App\Notifications\UserCreatedKafkaNotification  16.03ms DONE

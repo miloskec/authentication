@@ -10,8 +10,8 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
-use Tymon\JWTAuth\Contracts\JWTSubject;
 use Illuminate\Support\Str;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 
 class User extends Authenticatable implements JWTSubject
 {
@@ -27,7 +27,7 @@ class User extends Authenticatable implements JWTSubject
         'full_name',
         'email',
         'password_hash',
-        'is_admin'
+        'is_admin',
     ];
 
     /**
@@ -60,10 +60,10 @@ class User extends Authenticatable implements JWTSubject
         // Attach an event listener to the 'created' event
         static::created(function ($user) {
             $user->notify(new WelcomeEmailNotification());
-            $user->notify(new UserCreatedKafkaNotification($user));
+            $user->notify(new UserCreatedKafkaNotification());
         });
     }
-    
+
     public function getAuthPassword()
     {
         return $this->password_hash;
@@ -90,6 +90,7 @@ class User extends Authenticatable implements JWTSubject
             'token' => $token,
             'created_at' => now(),
         ]);
+
         return $token;
     }
 }

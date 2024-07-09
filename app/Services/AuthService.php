@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
+use Tymon\JWTAuth\Contracts\JWTSubject;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthService
@@ -42,7 +43,7 @@ class AuthService
         $data = array_intersect_key($data, array_flip($keys));
 
         // Attempt to verify the credentials and create a token for the user
-        if (!JWTAuth::attempt($data)) {
+        if (! JWTAuth::attempt($data)) {
             throw new AuthenticationException('Unauthorized', ['email']);
         }
 
@@ -52,7 +53,9 @@ class AuthService
     public function logout(): array
     {
         try {
-            JWTAuth::invalidate(JWTAuth::getToken());
+            JWTAuth::getToken();
+            JWTAuth::invalidate(true);
+
             return ['message' => 'Successfully logged out'];
         } catch (\Tymon\JWTAuth\Exceptions\JWTException $e) {
             return ['error' => 'Failed to logout, please try again.'];
@@ -65,13 +68,13 @@ class AuthService
         return $token;
     }
 
-    public function verifyJWT(string $token) : User
+    public function verifyJWT(string $token): User
     {
         try {
             JWTAuth::setToken($token);
             $user = JWTAuth::authenticate();
-            if (!$user) {
-                throw new AuthenticationException('Unauthorized', ['email']);
+            if (!$user instanceof User) {
+                throw new AuthenticationException('User not authenticated');
             }
         } catch (Exception $e) {
             Log::channel('authentication')->info(
@@ -84,15 +87,16 @@ class AuthService
             );
             throw $e;
         }
-        return  $user;
+
+        return $user;
     }
 
-    public function getUserByIdAndVerifyJWTRequest(string $token, int $user_id) : User
+    public function getUserByIdAndVerifyJWTRequest(string $token, int $user_id): User
     {
         try {
             JWTAuth::setToken($token);
             $user = JWTAuth::authenticate();
-            if (!$user) {
+            if (! $user) {
                 throw new AuthenticationException('Unauthorized', ['email']);
             }
         } catch (Exception $e) {
@@ -108,9 +112,10 @@ class AuthService
         }
         $user = User::find($user_id);
 
-        if (!$user) {
+        if (! $user) {
             throw new ModelNotFoundException('User not found', 404);
         }
+
         // Get user by ID and verify JWT
         return $user;
     }
@@ -119,6 +124,7 @@ class AuthService
     {
         // Send password recovery email
         $user = User::where('email', $email)->first();
+
         return $user->createPasswordResetToken();
     }
 
@@ -127,25 +133,29 @@ class AuthService
         // Send password recovery email
         $user = User::where('email', $email)->first();
         $token = $user->createPasswordResetToken();
-        
+
         Mail::to($email)->send(new PasswordReset($token));
     }
 
-    public function resetPassword(string $token, string $password, string $current_password) : User
+    public function resetPassword(string $token, string $password, string $current_password): User
     {
         JWTAuth::setToken($token);
         $user = JWTAuth::authenticate();
+        if (!$user instanceof User) {
+            throw new AuthenticationException('User not authenticated');
+        }
         //generate code to check if $current_password is equal to the current user password in the database
-        if(Hash::check($current_password, $user->password_hash)) {
+        if (Hash::check($current_password, $user->password_hash)) {
             $user->password_hash = Hash::make($password);
             $user->save();
+
             // Reset user password
-            return $user;    
+            return $user;
         }
         throw new AuthenticationException('Wrong current password');
     }
 
-    public function resetPasswordWithToken(string $email, string $password) : bool
+    public function resetPasswordWithToken(string $email, string $password): bool
     {
         // Reset password with token
         $user = User::where('email', $email)->first();
@@ -157,13 +167,13 @@ class AuthService
         return true;
     }
 
-    public function refreshJWT(string $token) : User
+    public function refreshJWT(string $token): User
     {
         try {
             JWTAuth::setToken($token);
             $user = JWTAuth::authenticate();
-            if (!$user) {
-                throw new AuthenticationException('Unauthorized', ['email']);
+            if (!$user instanceof User) {
+                throw new AuthenticationException('User not authenticated');
             }
         } catch (Exception $e) {
             Log::channel('authentication')->info(
@@ -176,6 +186,7 @@ class AuthService
             );
             throw $e;
         }
+
         // Refresh JWT
         return $user;
     }

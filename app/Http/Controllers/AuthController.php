@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Http\Controllers\Controller;
 use App\Http\Requests\GetUserByIdAndVerifyJWTToken;
 use App\Http\Requests\PasswordRecoveryRequest;
 use App\Http\Requests\PasswordResetRequest;
@@ -16,7 +15,6 @@ use App\Http\Resources\PasswordRecoverySuccessResource;
 use App\Http\Resources\UserLoginResource;
 use App\Http\Resources\UserResource;
 use App\Services\AuthService;
-use Illuminate\Http\Resources\Json\JsonResource;
 
 class AuthController extends Controller
 {
@@ -62,8 +60,10 @@ class AuthController extends Controller
         // In production, send email with a token
         if (config('app.env') === 'production') {
             $this->authService->sendPasswordRecoveryEmail($request->email);
+
             return (new PasswordRecoveryEmailSentResource(true))->withoutDataWrapper();
         }
+
         // In development environment, send token back
         return new PasswordRecoveryResource($this->authService->passwordRecovery($request->email));
     }
