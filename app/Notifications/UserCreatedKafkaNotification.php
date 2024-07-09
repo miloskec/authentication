@@ -3,11 +3,9 @@
 namespace App\Notifications;
 
 use App\Channels\KafkaChannel;
-use App\Models\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Notification;
-use Illuminate\Support\Facades\Log;
 
 class UserCreatedKafkaNotification extends Notification implements ShouldQueue
 {
@@ -17,11 +15,13 @@ class UserCreatedKafkaNotification extends Notification implements ShouldQueue
      * Create a new notification instance.
      */
     public function __construct()
-    {}
+    {
+    }
 
     /**
      * Get the notification's delivery channels.
      *
+     * @param object $notifiable
      * @return array<int, string>
      */
     public function via(object $notifiable)
@@ -29,6 +29,12 @@ class UserCreatedKafkaNotification extends Notification implements ShouldQueue
         return [KafkaChannel::class];
     }
 
+    /**
+     * Convert the notification into a Kafka message.
+     *
+     * @param object $notifiable
+     * @return array
+     */
     public function toKafka(object $notifiable)
     {
         return [

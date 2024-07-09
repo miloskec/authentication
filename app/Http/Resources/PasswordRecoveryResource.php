@@ -3,7 +3,6 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\JsonResource;
 
 class PasswordRecoveryResource extends BaseResource
 {
@@ -21,6 +20,6 @@ class PasswordRecoveryResource extends BaseResource
 
     protected function message()
     {
-        return "Recovery token successfully generated.";
+        return 'Recovery token successfully generated.';
     }
 }

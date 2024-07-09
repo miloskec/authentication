@@ -2,7 +2,6 @@
 
 namespace App\Http\Resources;
 
-use Illuminate\Http\Request;
 use Illuminate\Http\Resources\Json\JsonResource;
 
 class PasswordRecoverySuccessResource extends JsonResource
@@ -11,7 +10,7 @@ class PasswordRecoverySuccessResource extends JsonResource
     {
         return [
             'status' => 'success',
-            'message' => 'Password recovery is successful.'
+            'message' => 'Password recovery is successful.',
         ];
     }
 

@@ -14,6 +14,7 @@ class PasswordReset extends Mailable implements ShouldQueue
     use Queueable, SerializesModels;
 
     public $token;
+
     /**
      * Create a new message instance.
      */

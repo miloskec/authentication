@@ -3,7 +3,6 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\JsonResource;
 
 class UserResource extends BaseResource
 {
@@ -26,6 +25,6 @@ class UserResource extends BaseResource
 
     protected function message()
     {
-        return "User data retrieved successfully.";
+        return 'User data retrieved successfully.';
     }
 }
