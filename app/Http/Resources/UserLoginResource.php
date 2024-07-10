@@ -6,6 +6,12 @@ use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
+/**
+ * @property int $id
+ * @property string $email
+ * @property string $username
+ * @property string $full_name
+ */
 class UserLoginResource extends BaseResource
 {
     /**
