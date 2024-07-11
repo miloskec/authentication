@@ -13,6 +13,16 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
+/**
+ * @property int $id
+ * @property string $email
+ * @property string $username
+ * @property string $full_name
+ * @property string $password_hash
+ * @property bool $is_admin
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ */
 class User extends Authenticatable implements JWTSubject
 {
     use HasFactory, Notifiable;

@@ -4,6 +4,14 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
 
+/**
+ * @property int $id
+ * @property string $email
+ * @property string $username
+ * @property string $full_name
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ */
 class UserResource extends BaseResource
 {
     /**
