@@ -1,0 +1,12 @@
+  2024-07-11 15:06:05 App\Notifications\WelcomeEmailNotification ..... RUNNING
+  2024-07-11 15:06:08 App\Notifications\WelcomeEmailNotification ..... 2s DONE
+  2024-07-11 15:06:08 App\Notifications\UserCreatedKafkaNotification . RUNNING
+  2024-07-11 15:06:08 App\Notifications\UserCreatedKafkaNotification  58.02ms DONE
+  2024-07-11 15:08:36 App\Notifications\WelcomeEmailNotification ..... RUNNING
+  2024-07-11 15:08:38 App\Notifications\WelcomeEmailNotification ..... 1s DONE
+  2024-07-11 15:08:38 App\Notifications\UserCreatedKafkaNotification . RUNNING
+  2024-07-11 15:08:38 App\Notifications\UserCreatedKafkaNotification  15.15ms DONE
+  2024-07-11 22:43:28 App\Notifications\WelcomeEmailNotification ..... RUNNING
+  2024-07-11 22:43:28 App\Notifications\UserCreatedKafkaNotification . RUNNING
+  2024-07-11 22:43:28 App\Notifications\UserCreatedKafkaNotification  30.35ms DONE
+  2024-07-11 22:43:30 App\Notifications\WelcomeEmailNotification ..... 2s DONE

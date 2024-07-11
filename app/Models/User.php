@@ -11,6 +11,9 @@ use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Str;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Models\Activity;
+use Spatie\Activitylog\Traits\LogsActivity;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
 /**
@@ -25,7 +28,7 @@ use Tymon\JWTAuth\Contracts\JWTSubject;
  */
 class User extends Authenticatable implements JWTSubject
 {
-    use HasFactory, Notifiable;
+    use HasFactory, Notifiable, LogsActivity;
 
     /**
      * The attributes that are mass assignable.
@@ -61,6 +64,21 @@ class User extends Authenticatable implements JWTSubject
             'email_verified_at' => 'datetime',
             'password_hash' => 'hashed',
         ];
+    }
+
+    /**
+     * Get the activity log options for the model.
+     *
+     * @return \Spatie\Activitylog\LogOptions
+     */
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logAll() // Logs all attributes
+            ->logOnlyDirty()
+            ->dontLogIfAttributesChangedOnly(['password']) // Avoid logging if only password is changed
+            ->useLogName('user')
+            ->setDescriptionForEvent(fn (string $eventName) => "User has been {$eventName}");
     }
 
     protected static function boot()
