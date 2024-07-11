@@ -8,6 +8,7 @@ use GuzzleHttp\Exception\RequestException;
 use GuzzleHttp\Exception\ServerException;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
+use Illuminate\Contracts\Container\BindingResolutionException;
 use Illuminate\Database\Eloquent\Casts\Json;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
@@ -68,6 +69,7 @@ class Handler extends ExceptionHandler
     protected function formatErrorResponse(Throwable $exception, int $status): array
     {
         $exceptionDetails = $this->getExceptionDetails($exception);
+        
         $baseResponse = [
             'status' => $status,
             'source' => config('app.name').' API',
@@ -85,6 +87,8 @@ class Handler extends ExceptionHandler
             $baseResponse['source'] = $exceptionDetails['source'];
             $baseResponse['message'] = $exceptionDetails['message'];
             $baseResponse['error'] = $exceptionDetails['error'];
+        } elseif ($exception instanceof BindingResolutionException) {
+            $baseResponse['error']['details'] = $exception->getMessage();
         }
 
         return $baseResponse;
