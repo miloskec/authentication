@@ -12,8 +12,6 @@ class ActivityServiceProvider extends ServiceProvider
 {
     /**
      * Register any application services.
-     *
-     * @return void
      */
     public function register(): void
     {
@@ -22,18 +20,16 @@ class ActivityServiceProvider extends ServiceProvider
 
     /**
      * Bootstrap any application services.
-     *
-     * @return void
      */
     public function boot(): void
     {
-        $request = Request::instance();
-        Log::channel('authentication')->info('Header:' . $request->header('X-User-Email'));
-        
-        Activity::saving(function (Activity $activity) use ($request) {
+        Log::channel('authentication')->info('Header:' . Request::instance()->header('X-User-Email'));
 
-            if ($request->header('X-User-Email'))
+        Activity::saving(function (Activity $activity) {
+            $request = Request::instance();
+            if ($request->header('X-User-Email')) {
                 $activity->causedBy($this->getUserFromEmail($request->header('X-User-Email')));
+            }
 
             if (isset($activity->properties['attributes']['password'])) {
                 $activity->properties['attributes']['password'] = '***';
@@ -50,7 +46,8 @@ class ActivityServiceProvider extends ServiceProvider
         });
     }
 
-    protected function getUserFromEmail($email){
+    protected function getUserFromEmail($email)
+    {
         return User::where('email', $email)->first();
     }
 }

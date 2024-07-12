@@ -14,14 +14,11 @@ class UserCreatedKafkaNotification extends Notification implements ShouldQueue
     /**
      * Create a new notification instance.
      */
-    public function __construct()
-    {
-    }
+    public function __construct() {}
 
     /**
      * Get the notification's delivery channels.
      *
-     * @param object $notifiable
      * @return array<int, string>
      */
     public function via(object $notifiable)
@@ -32,7 +29,6 @@ class UserCreatedKafkaNotification extends Notification implements ShouldQueue
     /**
      * Convert the notification into a Kafka message.
      *
-     * @param object $notifiable
      * @return array
      */
     public function toKafka(object $notifiable)
