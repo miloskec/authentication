@@ -10,3 +10,4 @@
   2024-07-11 22:43:28 App\Notifications\UserCreatedKafkaNotification . RUNNING
   2024-07-11 22:43:28 App\Notifications\UserCreatedKafkaNotification  30.35ms DONE
   2024-07-11 22:43:30 App\Notifications\WelcomeEmailNotification ..... 2s DONE
+{"message":"Header:","context":{},"level":200,"level_name":"INFO","channel":"local","datetime":"2024-07-11T23:52:50.101229+00:00","extra":{}}
