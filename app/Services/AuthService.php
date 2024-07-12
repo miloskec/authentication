@@ -11,7 +11,6 @@ use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Mail;
-use Tymon\JWTAuth\Contracts\JWTSubject;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
 class AuthService
@@ -73,7 +72,7 @@ class AuthService
         try {
             JWTAuth::setToken($token);
             $user = JWTAuth::authenticate();
-            if (!$user instanceof User) {
+            if (! $user instanceof User) {
                 throw new AuthenticationException('User not authenticated');
             }
         } catch (Exception $e) {
@@ -141,7 +140,7 @@ class AuthService
     {
         JWTAuth::setToken($token);
         $user = JWTAuth::authenticate();
-        if (!$user instanceof User) {
+        if (! $user instanceof User) {
             throw new AuthenticationException('User not authenticated');
         }
         //generate code to check if $current_password is equal to the current user password in the database
@@ -172,7 +171,7 @@ class AuthService
         try {
             JWTAuth::setToken($token);
             $user = JWTAuth::authenticate();
-            if (!$user instanceof User) {
+            if (! $user instanceof User) {
                 throw new AuthenticationException('User not authenticated');
             }
         } catch (Exception $e) {

@@ -14,7 +14,7 @@ Route::get('/health', function () {
     return response()->json(['status' => 'OK'], 200);
 });
 
-Route::middleware(['auth:api','validateEmailHeader'])->group(function () {
+Route::middleware(['auth:api', 'validateEmailHeader'])->group(function () {
     Route::post('/verify-jwt', [AuthController::class, 'verifyJWT']);
     Route::post('/get-user-by-id-and-verify-jwt', [AuthController::class, 'getUserByIdAndVerifyJWTRequest']);
     Route::post('/refresh-token', [AuthController::class, 'refresh']);

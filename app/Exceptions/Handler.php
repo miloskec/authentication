@@ -9,12 +9,11 @@ use GuzzleHttp\Exception\ServerException;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Auth\AuthenticationException;
 use Illuminate\Contracts\Container\BindingResolutionException;
-use Illuminate\Database\Eloquent\Casts\Json;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
-use Illuminate\Http\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\HttpKernel\Exception\HttpException;
 use Throwable;
@@ -53,7 +52,6 @@ class Handler extends ExceptionHandler
      * Render an exception into an HTTP response.
      *
      * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\JsonResponse
      */
     public function render($request, Throwable $exception): JsonResponse
     {
@@ -69,7 +67,7 @@ class Handler extends ExceptionHandler
     protected function formatErrorResponse(Throwable $exception, int $status): array
     {
         $exceptionDetails = $this->getExceptionDetails($exception);
-        
+
         $baseResponse = [
             'status' => $status,
             'source' => config('app.name').' API',
