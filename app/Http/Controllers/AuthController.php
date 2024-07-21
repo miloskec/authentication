@@ -14,7 +14,10 @@ use App\Http\Resources\PasswordRecoveryResource;
 use App\Http\Resources\PasswordRecoverySuccessResource;
 use App\Http\Resources\UserLoginResource;
 use App\Http\Resources\UserResource;
+use App\Models\User;
 use App\Services\AuthService;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class AuthController extends Controller
 {
@@ -47,7 +50,7 @@ class AuthController extends Controller
 
     public function getUserByIdAndVerifyJWTRequest(GetUserByIdAndVerifyJWTToken $request)
     {
-        return new UserResource($this->authService->getUserByIdAndVerifyJWTRequest($request->token, $request->user_id));
+        return new UserResource($this->authService->getUserByIdAndVerifyJWTRequest($request->user_id));
     }
 
     public function verify(VerifyTokenRequest $request)
@@ -82,5 +85,15 @@ class AuthController extends Controller
     public function refresh(VerifyTokenRequest $request)
     {
         return new UserLoginResource($this->authService->refreshJWT($request->token));
+    }
+
+    public function checkEmailHeader(Request $request)
+    {
+        $user = User::find(Auth::user()->id);
+        $user->full_name = 'Micro Services Test 4567';
+        $user->save();
+        return response()->json([
+            'user' => $user,
+        ]);
     }
 }

@@ -11,3 +11,50 @@
   2024-07-11 22:43:28 App\Notifications\UserCreatedKafkaNotification  30.35ms DONE
   2024-07-11 22:43:30 App\Notifications\WelcomeEmailNotification ..... 2s DONE
 {"message":"Header:","context":{},"level":200,"level_name":"INFO","channel":"local","datetime":"2024-07-11T23:52:50.101229+00:00","extra":{}}
+{"message":"Header:","context":{},"level":200,"level_name":"INFO","channel":"local","datetime":"2024-07-12T22:56:53.416607+02:00","extra":{}}
+{"message":"Header:","context":{},"level":200,"level_name":"INFO","channel":"local","datetime":"2024-07-14T01:54:07.647063+02:00","extra":{}}
+  2024-07-14 01:56:05 App\Notifications\WelcomeEmailNotification ..... RUNNING
+  2024-07-14 01:56:17 App\Notifications\WelcomeEmailNotification .... 11s DONE
+  2024-07-14 01:56:17 App\Notifications\UserCreatedKafkaNotification . RUNNING
+  2024-07-14 01:56:17 App\Notifications\UserCreatedKafkaNotification  64.97ms DONE
+  2024-07-14 02:31:09 App\Notifications\WelcomeEmailNotification ..... RUNNING
+  2024-07-14 02:31:21 App\Notifications\WelcomeEmailNotification .... 12s DONE
+  2024-07-14 02:31:21 App\Notifications\UserCreatedKafkaNotification . RUNNING
+  2024-07-14 02:31:21 App\Notifications\UserCreatedKafkaNotification  14.84ms DONE
+  2024-07-14 02:55:08 App\Notifications\WelcomeEmailNotification ..... RUNNING
+  2024-07-14 02:55:20 App\Notifications\WelcomeEmailNotification .... 11s DONE
+  2024-07-14 02:55:20 App\Notifications\UserCreatedKafkaNotification . RUNNING
+  2024-07-14 02:55:20 App\Notifications\UserCreatedKafkaNotification  11.21ms DONE
+  2024-07-14 02:57:21 App\Notifications\WelcomeEmailNotification ..... RUNNING
+  2024-07-14 02:57:34 App\Notifications\WelcomeEmailNotification .... 13s DONE
+  2024-07-14 02:57:34 App\Notifications\UserCreatedKafkaNotification . RUNNING
+  2024-07-14 02:57:34 App\Notifications\UserCreatedKafkaNotification  16.14ms DONE
+{"message":"Header:","context":{},"level":200,"level_name":"INFO","channel":"local","datetime":"2024-07-14T18:56:01.576560+02:00","extra":{}}
+  2024-07-15 01:01:08 App\Notifications\WelcomeEmailNotification ..... RUNNING
+  2024-07-15 01:01:08 App\Notifications\UserCreatedKafkaNotification . RUNNING
+  2024-07-15 01:01:08 App\Notifications\UserCreatedKafkaNotification  20.10ms DONE
+  2024-07-15 01:01:10 App\Notifications\WelcomeEmailNotification ..... 2s DONE
+  2024-07-15 01:57:45 App\Notifications\WelcomeEmailNotification ..... RUNNING
+  2024-07-15 01:57:45 App\Notifications\UserCreatedKafkaNotification . RUNNING
+  2024-07-15 01:57:45 App\Notifications\UserCreatedKafkaNotification  24.05ms DONE
+  2024-07-15 01:57:47 App\Notifications\WelcomeEmailNotification ..... 2s DONE
+{"message":"Header:","context":{},"level":200,"level_name":"INFO","channel":"local","datetime":"2024-07-15T03:07:57.087552+01:00","extra":{}}
+{"message":"Header:","context":{},"level":200,"level_name":"INFO","channel":"local","datetime":"2024-07-15T16:08:49.096264+01:00","extra":{}}
+{"message":"Header:","context":{},"level":200,"level_name":"INFO","channel":"local","datetime":"2024-07-15T16:15:29.490652+01:00","extra":{}}
+{"message":"Header:","context":{},"level":200,"level_name":"INFO","channel":"local","datetime":"2024-07-15T16:22:42.626187+01:00","extra":{}}
+{"message":"Header:","context":{},"level":200,"level_name":"INFO","channel":"local","datetime":"2024-07-15T19:56:52.983371+01:00","extra":{}}
+{"message":"Header:","context":{},"level":200,"level_name":"INFO","channel":"local","datetime":"2024-07-15T20:08:30.533684+01:00","extra":{}}
+{"message":"Header:","context":{},"level":200,"level_name":"INFO","channel":"local","datetime":"2024-07-15T20:16:45.875508+01:00","extra":{}}
+{"message":"Header:","context":{},"level":200,"level_name":"INFO","channel":"local","datetime":"2024-07-15T20:26:52.752954+01:00","extra":{}}
+  2024-07-15 22:13:48 App\Notifications\WelcomeEmailNotification ..... RUNNING
+  2024-07-15 22:13:50 App\Notifications\WelcomeEmailNotification ..... 2s DONE
+  2024-07-15 22:13:50 App\Notifications\UserCreatedKafkaNotification . RUNNING
+  2024-07-15 22:13:50 App\Notifications\UserCreatedKafkaNotification  58.02ms DONE
+  2024-07-16 00:48:11 App\Notifications\WelcomeEmailNotification ..... RUNNING
+  2024-07-16 00:48:13 App\Notifications\WelcomeEmailNotification ..... 1s DONE
+  2024-07-16 00:48:13 App\Notifications\UserCreatedKafkaNotification . RUNNING
+  2024-07-16 00:48:13 App\Notifications\UserCreatedKafkaNotification  12.99ms DONE
+  2024-07-16 01:04:02 App\Notifications\WelcomeEmailNotification ..... RUNNING
+  2024-07-16 01:04:04 App\Notifications\WelcomeEmailNotification ..... 1s DONE
+  2024-07-16 01:04:04 App\Notifications\UserCreatedKafkaNotification . RUNNING
+  2024-07-16 01:04:04 App\Notifications\UserCreatedKafkaNotification  16.57ms DONE
