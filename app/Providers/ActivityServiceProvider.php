@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use App\Models\User;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Request;
 use Illuminate\Support\ServiceProvider;
@@ -23,12 +24,13 @@ class ActivityServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        Log::channel('authentication')->info('Header:' . Request::instance()->header('X-User-Email'));
-
         Activity::saving(function (Activity $activity) {
             $request = Request::instance();
-            if ($request->header('X-User-Email')) {
-                $activity->causedBy($this->getUserFromEmail($request->header('X-User-Email')));
+            // Even validation and user attach action is done in middleware they will be executed before saving 
+            // because savig acxtion is triggered after the validation and user attach action
+            $user = Auth::user();
+            if ($user) {
+                $activity->causedBy($user);
             }
 
             if (isset($activity->properties['attributes']['password'])) {
@@ -44,10 +46,5 @@ class ActivityServiceProvider extends ServiceProvider
             ]);
             //...
         });
-    }
-
-    protected function getUserFromEmail($email)
-    {
-        return User::where('email', $email)->first();
     }
 }

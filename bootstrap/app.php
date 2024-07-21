@@ -1,6 +1,5 @@
 <?php
 
-use App\Http\Middleware\ValidateEmailHeader;
 use Illuminate\Auth\Middleware\Authenticate;
 use Illuminate\Foundation\Application;
 use Illuminate\Foundation\Configuration\Exceptions;
@@ -16,7 +15,6 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware) {
         $middleware->alias([
             'auth:api' => Authenticate::class,
-            'validateEmailHeader' => ValidateEmailHeader::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions) {

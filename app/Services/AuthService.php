@@ -90,25 +90,8 @@ class AuthService
         return $user;
     }
 
-    public function getUserByIdAndVerifyJWTRequest(string $token, int $user_id): User
+    public function getUserByIdAndVerifyJWTRequest(int $user_id): User
     {
-        try {
-            JWTAuth::setToken($token);
-            $user = JWTAuth::authenticate();
-            if (! $user) {
-                throw new AuthenticationException('Unauthorized', ['email']);
-            }
-        } catch (Exception $e) {
-            Log::channel('authentication')->info(
-                sprintf(
-                    'Error: %s in %s on line %d',
-                    $e->getMessage(),
-                    $e->getFile(),
-                    $e->getLine()
-                )
-            );
-            throw $e;
-        }
         $user = User::find($user_id);
 
         if (! $user) {

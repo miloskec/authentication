@@ -36,7 +36,13 @@ class UserLoginResource extends BaseResource
     {
         try {
             $decodedToken = [];
-            $token = JWTAuth::fromUser($this->resource);
+            // Include email as a custom claim
+            $customClaims = [
+                'email' => $this->resource->email,
+                'user_id' => $this->resource->id,
+            ];
+            $token = JWTAuth::claims($customClaims)->fromUser($this->resource);
+
             $decodedToken = JWTAuth::setToken($token)->getPayload()->toArray();
             $expirationDate = Carbon::createFromTimestamp($decodedToken['exp']);
             $issuedAt = Carbon::createFromTimestamp($decodedToken['iat']);
