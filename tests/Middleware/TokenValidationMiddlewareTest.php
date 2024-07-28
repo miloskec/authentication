@@ -15,7 +15,8 @@ class TokenValidationMiddlewareTest extends TestCase
 
         $response = $this->postJson(
             '/api/verify-jwt',
-            ['token' => $token]
+            [],
+            ['Authorization' => 'Bearer ' . $token]
         );
         $response
             ->assertStatus(200)
@@ -32,14 +33,15 @@ class TokenValidationMiddlewareTest extends TestCase
 
         $response = $this->postJson(
             '/api/verify-jwt',
-            ['token' => $token . 'wrong']
+            [],
+            ['Authorization' => 'Bearer ' . $token . 'wrong']
         );
         $response
             ->assertStatus(401)
             ->assertJson(function (AssertableJson $json) use ($user) {
                 $json
                     ->hasAll(['source', 'status', 'message', 'error', 'error.type', 'error.details'])
-                    ->where('message', 'Unauthenticated.');
+                    ->where('message', 'Token is invalid: Token Signature could not be verified.');
             });
     }
 }

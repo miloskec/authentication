@@ -40,12 +40,12 @@ class AuthController extends Controller
 
     public function logout(VerifyTokenRequest $request)
     {
-        return $this->authService->logout($request->token);
+        return $this->authService->logout($request->bearerToken());
     }
 
     public function verifyJWT(VerifyTokenRequest $request)
     {
-        return new UserResource($this->authService->verifyJWT($request->token));
+        return new UserResource($this->authService->verifyJWT($request->bearerToken()));
     }
 
     public function getUserByIdAndVerifyJWTRequest(GetUserByIdAndVerifyJWTToken $request)
@@ -55,7 +55,7 @@ class AuthController extends Controller
 
     public function verify(VerifyTokenRequest $request)
     {
-        return $this->authService->verify($request->token);
+        return $this->authService->verify($request->bearerToken());
     }
 
     public function passwordRecovery(PasswordRecoveryRequest $request)
@@ -79,12 +79,12 @@ class AuthController extends Controller
 
     public function resetPassword(PasswordResetRequest $request)
     {
-        return new UserLoginResource($this->authService->resetPassword($request->token, $request->password, $request->current_password));
+        return new UserLoginResource($this->authService->resetPassword($request->bearerToken(), $request->password, $request->current_password));
     }
 
     public function refresh(VerifyTokenRequest $request)
     {
-        return new UserLoginResource($this->authService->refreshJWT($request->token));
+        return new UserLoginResource($this->authService->refreshJWT($request->bearerToken()));
     }
 
     public function checkEmailHeader(Request $request)
