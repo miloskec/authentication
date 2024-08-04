@@ -1,20 +1,17 @@
 services:
     authentication:
-        image: sail-8.3/app
+        image: authentication:latest
         extra_hosts:
             - 'host.docker.internal:host-gateway'
-#        ports:
-#            - '${APP_PORT:-80}:80'
-#            - '${VITE_PORT:-5173}:${VITE_PORT:-5173}'
+        #   ports:
+        #        - '${APP_PORT:-80}:80'
+        #        - '${VITE_PORT:-5173}:${VITE_PORT:-5173}'
         healthcheck:
-            test: ["CMD", "curl", "-f", "http://localhost:80/api/health"]
+            test: [ "CMD", "curl", "-f", "http://localhost:80/api/health" ]
             interval: 30s
             timeout: 10s
             retries: 3
         environment:
-            TZ: ${TZ}
-            WWWUSER: '${WWWUSER}'
-            WWWGROUP: '${WWWGROUP}'
             LARAVEL_SAIL: 1
             XDEBUG_MODE: '${SAIL_XDEBUG_MODE:-off}'
             XDEBUG_CONFIG: '${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}'
@@ -23,11 +20,6 @@ services:
             # Add any other required environment variables, such as authentication tokens
             #CONFLUENT_CLOUD_API_KEY: 'VOJCMZC7AT4ZKRY3'
             #CONFLUENT_CLOUD_API_SECRET: 'qBH2THFxkVSRQsFNdRY99o4QrqOBuRmr6rLbqEbNJj6gUDVQBamt/h3hraERbdez'
-        volumes:
-            - '.:/var/www/html'
-            - ./initial-script.sh:/usr/local/bin/initial-script.sh
-            - ./entrypoint.sh:/usr/local/bin/entrypoint.sh
-        entrypoint: ["/usr/local/bin/entrypoint.sh"]
         tty: true
         networks:
             - sail
@@ -47,11 +39,11 @@ services:
             MYSQL_ALLOW_EMPTY_PASSWORD: 1
         volumes:
             - 'sail-mysql-authentication:/var/lib/mysql'
-            - './vendor/laravel/sail/database/mysql/create-testing-database.sh:/docker-entrypoint-initdb.d/10-create-testing-database.sh'
+            - './docker/mysql/create-testing-database.sh:/docker-entrypoint-initdb.d/10-create-testing-database.sh'
         networks:
             - sail
         healthcheck:
-            test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+            test: [ "CMD", "mysqladmin", "ping", "-h", "localhost" ]
             interval: 30s
             timeout: 10s
             retries: 3
