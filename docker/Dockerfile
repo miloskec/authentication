@@ -5,6 +5,7 @@ LABEL maintainer="Taylor Otwell"
 ARG APP_TIMEZONE
 ARG WWWGROUP
 ARG NODE_VERSION=20
+ARG FORWARD_DB_PORT
 ARG MYSQL_CLIENT="mysql-client"
 ARG POSTGRES_VERSION=15
 
@@ -67,4 +68,45 @@ WORKDIR /var/www/html
 
 COPY . .
 
-RUN chown -R sail:sail /var/www/html
+RUN composer install --ignore-platform-reqs
+
+RUN chown -R $WWWGROUP:sail /var/www/html
+
+# Install necessary packages
+RUN apt-get update && apt-get install -y \
+    iputils-ping \
+    curl \
+    telnet \
+    net-tools \
+    wget \
+    gnupg2 \
+    software-properties-common \
+    autoconf \
+    automake \
+    libtool \
+    build-essential \
+    php-pear \
+    php-dev \
+    librdkafka-dev
+
+RUN echo "Clearing cache..." && \
+    if [ -d "/tmp/pear/cache" ]; then \
+    pecl clear-cache; \
+    else \
+    mkdir -p /tmp/pear/cache && \
+    echo "Cache directory created at /tmp/pear/cache"; \
+    fi && \
+    echo "Updating PECL channel..." && \
+    pecl channel-update pecl.php.net && \
+    echo "Installing rdkafka..." && \
+    if pecl list | grep -qi '^rdkafka'; then \
+    echo "rdkafka is already installed."; \
+    else \
+    echo "rdkafka is not installed. Installing..." && \
+    yes '' | pecl install rdkafka && \
+    echo "extension=rdkafka.so" >> /etc/php/8.3/cli/php.ini; \
+    fi
+
+EXPOSE 8000
+
+ENTRYPOINT ["start-container"]
