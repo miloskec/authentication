@@ -24,7 +24,7 @@ services:
             #CONFLUENT_CLOUD_API_SECRET: 'qBH2THFxkVSRQsFNdRY99o4QrqOBuRmr6rLbqEbNJj6gUDVQBamt/h3hraERbdez'
         volumes:
             - '.:/var/www/html'
-            - '/var/www/html/vendor'
+            - 'vendor:/var/www/html/vendor'
             - '/var/www/html/storage/logs'
             - '/var/www/html/logs'
             - './artisan:/var/www/html/artisan:ro'
@@ -61,4 +61,6 @@ networks:
         driver: bridge
 volumes:
     sail-mysql-authentication:
+        driver: local
+    vendor:
         driver: local
