@@ -81,3 +81,18 @@
   2024-08-05 01:21:08 App\Notifications\WelcomeEmailNotification ..................................................................................................................................................................... 3s DONE
   2024-08-05 02:33:20 App\Notifications\UserCreatedKafkaNotification ................................................................................................................................................................. RUNNING
   2024-08-05 02:33:20 App\Notifications\UserCreatedKafkaNotification ............................................................................................................................................................ 20.07ms DONE
+{"message":"Error: Illuminate\\Database\\QueryException :: SQLSTATE[42S02]: Base table or view not found: 1146 Table 'laravel.cache' doesn't exist (Connection: mysql, SQL: select * from `cache` where `key` in (illuminate:queue:restart)) in /var/www/html/vendor/laravel/framework/src/Illuminate/Database/Connection.php on line 813","context":{},"level":400,"level_name":"ERROR","channel":"local","datetime":"2024-08-05T09:15:17.859320+01:00","extra":{}}
+
+In Connection.php line 813:
+                                                                               
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'laravel.cache' d  
+  oesn't exist (Connection: mysql, SQL: select * from `cache` where `key` in   
+  (illuminate:queue:restart))                                                  
+                                                                               
+
+In Connection.php line 407:
+                                                                               
+  SQLSTATE[42S02]: Base table or view not found: 1146 Table 'laravel.cache' d  
+  oesn't exist                                                                 
+                                                                               
+
