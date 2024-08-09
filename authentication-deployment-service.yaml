@@ -1,0 +1,123 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: authentication-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: authentication
+  template:
+    metadata:
+      labels:
+        app: authentication
+    spec:
+      containers:
+      - name: authentication
+        image: miloskec/authentication:latest
+        env:
+        - name: DB_HOST
+          value: "mysql-authent-service"
+        - name: DB_PORT
+          value: "3306"
+        - name: DB_DATABASE
+          value: "laravel"
+        - name: DB_USERNAME
+          value: "sail"
+        - name: DB_PASSWORD
+          value: "password"
+        - name: JWT_TTL
+          value: "600"
+        ports:
+        - containerPort: 80
+        volumeMounts:
+        - name: app-authent-storage-logs
+          mountPath: /var/www/html/storage/logs
+        - name: app-authent-logs
+          mountPath: /var/www/html/logs
+      volumes:
+      - name: app-authent-storage-logs
+        persistentVolumeClaim:
+          claimName: app-apslc
+      - name: app-authent-logs
+        persistentVolumeClaim:
+          claimName: app-aplc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: authentication-service
+spec:
+  type: ClusterIP
+  selector:
+    app: authentication
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: app-authent-storage-logs
+  labels:
+    type: app-authent-storage-logs
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+  - ReadWriteOnce
+  volumeMode: Filesystem
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: standard
+  hostPath:
+    path: /mnt/salogs
+    type: DirectoryOrCreate
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: app-apslc
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: standard
+  selector:
+    matchLabels:
+      type: app-authent-storage-logs
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: app-authent-logs
+  labels:
+    type: app-authent-logs
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+  - ReadWriteOnce
+  volumeMode: Filesystem
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: standard
+  hostPath:
+    path: /mnt/alogs
+    type: DirectoryOrCreate
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: app-aplc
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 5Gi
+  storageClassName: standard
+  selector:
+    matchLabels:
+      type: app-authent-logs
