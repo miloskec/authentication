@@ -32,7 +32,7 @@ spec:
       volumes:
       - name: mysql-authent-volume
         persistentVolumeClaim:
-          claimName: mysql-apvc
+          claimName: mysql-authent-pvc
 ---
 apiVersion: v1
 kind: Service
@@ -58,16 +58,16 @@ spec:
   accessModes:
   - ReadWriteOnce
   volumeMode: Filesystem
-  persistentVolumeReclaimPolicy: Retain
+  persistentVolumeReclaimPolicy: Delete # Change to Retain
   storageClassName: standard
   hostPath:
-    path: /mnt/amysql
+    path: /mnt/authentication-mysql
     type: DirectoryOrCreate
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  name: mysql-apvc
+  name: mysql-authent-pvc
 spec:
   accessModes:
   - ReadWriteOnce
