@@ -22,25 +22,52 @@ spec:
         - name: DB_PORT
           value: "3306"
         - name: DB_DATABASE
-          value: "laravel"
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: MYSQL_DATABASE
         - name: DB_USERNAME
-          value: "sail"
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: MYSQL_USER
         - name: DB_PASSWORD
-          value: "password"
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: MYSQL_PASSWORD
         - name: JWT_TTL
           value: "600"
         - name: MAIL_HOST
-          value: "live.smtp.mailtrap.io"
+          valueFrom:
+            secretKeyRef:
+              name: mail-secret
+              key: host
         - name: MAIL_PORT
-          value: "587"
+          valueFrom:
+            secretKeyRef:
+              name: mail-secret
+              key: port
         - name: MAIL_MAILER
-          value: "smtp"
+          valueFrom:
+            secretKeyRef:
+              name: mail-secret
+              key: mailer
         - name: MAIL_USERNAME
-          value: "api"
+          valueFrom:
+            secretKeyRef:
+              name: mail-secret
+              key: username
         - name: MAIL_PASSWORD
-          value: "8eee482ebc92573bee387b98ad0a4484"
+          valueFrom:
+            secretKeyRef:
+              name: mail-secret
+              key: password
         - name: MAIL_ENCRYPTION
-          value: "tls"
+          valueFrom:
+            secretKeyRef:
+              name: mail-secret
+              key: encryption
         ports:
         - containerPort: 80
         volumeMounts:
