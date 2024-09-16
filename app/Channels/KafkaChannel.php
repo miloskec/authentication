@@ -23,7 +23,7 @@ class KafkaChannel
             body: ['user' => json_encode($message)],
             key: (string) $message['id']
         );
-        $producer = Kafka::publish(config('brokers'))->onTopic(config('kafka.topics.user_created.topic'))->withMessage($message);
+        $producer = Kafka::publish(config('kafka.brokers'))->onTopic(config('kafka.topics.user_created.topic'))->withMessage($message);
         $producer->send();
     }
 }

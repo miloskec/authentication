@@ -1,0 +1,102 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql-authent-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql-authentication
+  template:
+    metadata:
+      labels:
+        app: mysql-authentication
+    spec:
+      containers:
+      - name: mysql
+        image: mysql/mysql-server:8.0
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: MYSQL_ROOT_PASSWORD
+        - name: MYSQL_DATABASE
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: MYSQL_DATABASE
+        - name: MYSQL_USER
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: MYSQL_USER
+        - name: MYSQL_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: mysql-secret
+              key: MYSQL_PASSWORD
+        ports:
+        - containerPort: 3306
+        readinessProbe:
+          exec:
+            command:
+            - /bin/sh
+            - -c
+            - 'mysql --user=$MYSQL_USER --password=$MYSQL_PASSWORD -e "SELECT 1"'
+          initialDelaySeconds: 30
+          periodSeconds: 30
+          timeoutSeconds: 10
+          failureThreshold: 3
+        volumeMounts:
+        - name: mysql-authent-volume
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: mysql-authent-volume
+        persistentVolumeClaim:
+          claimName: mysql-authent-pvc
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: mysql-authent-service
+spec:
+  ports:
+  - port: 3306
+    targetPort: 3306
+  selector:
+    app: mysql-authentication
+  clusterIP: None # Headless service
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: mysql-authent-volume
+  labels:
+    type: local
+spec:
+  capacity:
+    storage: 10Gi
+  accessModes:
+  - ReadWriteOnce
+  volumeMode: Filesystem
+  persistentVolumeReclaimPolicy: Delete # Change to Retain
+  storageClassName: standard
+  hostPath:
+    path: /mnt/authentication-mysql
+    type: DirectoryOrCreate
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: mysql-authent-pvc
+spec:
+  accessModes:
+  - ReadWriteOnce
+  resources:
+    requests:
+      storage: 10Gi
+  storageClassName: standard
+  selector:
+    matchLabels:
+      type: local
