@@ -19,10 +19,6 @@ services:
             XDEBUG_MODE: '${SAIL_XDEBUG_MODE:-off}'
             XDEBUG_CONFIG: '${SAIL_XDEBUG_CONFIG:-client_host=host.docker.internal}'
             IGNITION_LOCAL_SITES_PATH: '${PWD}'
-            #CONFLUENT_REST_URL: 'https://pkc-v5590.asia-northeast2.gcp.confluent.cloud:443'  # Add the Confluent Cloud REST Proxy URL here
-            # Add any other required environment variables, such as authentication tokens
-            #CONFLUENT_CLOUD_API_KEY: 'VOJCMZC7AT4ZKRY3'
-            #CONFLUENT_CLOUD_API_SECRET: 'qBH2THFxkVSRQsFNdRY99o4QrqOBuRmr6rLbqEbNJj6gUDVQBamt/h3hraERbdez'
         tty: true
         networks:
             - sail
