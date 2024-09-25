@@ -23,8 +23,7 @@ class GetUserByIdAndVerifyJWTToken extends FormRequest
     public function rules(): array
     {
         return [
-            'user_id' => 'required',
-            'token' => 'required|string',
+            'user_id' => 'required'
         ];
     }
 }

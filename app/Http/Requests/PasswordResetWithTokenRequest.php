@@ -2,16 +2,16 @@
 
 namespace App\Http\Requests;
 
+use App\Rules\ValidPasswordResetToken;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UserLoginRequest extends FormRequest
+class PasswordResetWithTokenRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        //return false;
         return true;
     }
 
@@ -23,11 +23,13 @@ class UserLoginRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'email' => 'required|email',
+            'email' => 'required|email|exists:users,email',
+            'reset_token' => ['required', 'string', new ValidPasswordResetToken($this->email)],
             'password' => [
                 'required',
                 'string',
                 'min:8',            // Must be at least 8 characters
+                //'confirmed',        // Must match the password_confirmation field
                 'regex:/[a-z]/',    // Must contain at least one lowercase letter
                 'regex:/[A-Z]/',    // Must contain at least one uppercase letter
                 'regex:/[0-9]/',    // Must contain at least one digit

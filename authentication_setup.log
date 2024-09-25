@@ -1,0 +1,81 @@
+  2024-07-11 15:06:05 App\Notifications\WelcomeEmailNotification ..... RUNNING
+  2024-07-11 15:06:08 App\Notifications\WelcomeEmailNotification ..... 2s DONE
+  2024-07-11 15:06:08 App\Notifications\UserCreatedKafkaNotification . RUNNING
+  2024-07-11 15:06:08 App\Notifications\UserCreatedKafkaNotification  58.02ms DONE
+  2024-07-11 15:08:36 App\Notifications\WelcomeEmailNotification ..... RUNNING
+  2024-07-11 15:08:38 App\Notifications\WelcomeEmailNotification ..... 1s DONE
+  2024-07-11 15:08:38 App\Notifications\UserCreatedKafkaNotification . RUNNING
+  2024-07-11 15:08:38 App\Notifications\UserCreatedKafkaNotification  15.15ms DONE
+  2024-07-11 22:43:28 App\Notifications\WelcomeEmailNotification ..... RUNNING
+  2024-07-11 22:43:28 App\Notifications\UserCreatedKafkaNotification . RUNNING
+  2024-07-11 22:43:28 App\Notifications\UserCreatedKafkaNotification  30.35ms DONE
+  2024-07-11 22:43:30 App\Notifications\WelcomeEmailNotification ..... 2s DONE
+{"message":"Header:","context":{},"level":200,"level_name":"INFO","channel":"local","datetime":"2024-07-11T23:52:50.101229+00:00","extra":{}}
+{"message":"Header:","context":{},"level":200,"level_name":"INFO","channel":"local","datetime":"2024-07-12T22:56:53.416607+02:00","extra":{}}
+{"message":"Header:","context":{},"level":200,"level_name":"INFO","channel":"local","datetime":"2024-07-14T01:54:07.647063+02:00","extra":{}}
+  2024-07-14 01:56:05 App\Notifications\WelcomeEmailNotification ..... RUNNING
+  2024-07-14 01:56:17 App\Notifications\WelcomeEmailNotification .... 11s DONE
+  2024-07-14 01:56:17 App\Notifications\UserCreatedKafkaNotification . RUNNING
+  2024-07-14 01:56:17 App\Notifications\UserCreatedKafkaNotification  64.97ms DONE
+  2024-07-14 02:31:09 App\Notifications\WelcomeEmailNotification ..... RUNNING
+  2024-07-14 02:31:21 App\Notifications\WelcomeEmailNotification .... 12s DONE
+  2024-07-14 02:31:21 App\Notifications\UserCreatedKafkaNotification . RUNNING
+  2024-07-14 02:31:21 App\Notifications\UserCreatedKafkaNotification  14.84ms DONE
+  2024-07-14 02:55:08 App\Notifications\WelcomeEmailNotification ..... RUNNING
+  2024-07-14 02:55:20 App\Notifications\WelcomeEmailNotification .... 11s DONE
+  2024-07-14 02:55:20 App\Notifications\UserCreatedKafkaNotification . RUNNING
+  2024-07-14 02:55:20 App\Notifications\UserCreatedKafkaNotification  11.21ms DONE
+  2024-07-14 02:57:21 App\Notifications\WelcomeEmailNotification ..... RUNNING
+  2024-07-14 02:57:34 App\Notifications\WelcomeEmailNotification .... 13s DONE
+  2024-07-14 02:57:34 App\Notifications\UserCreatedKafkaNotification . RUNNING
+  2024-07-14 02:57:34 App\Notifications\UserCreatedKafkaNotification  16.14ms DONE
+{"message":"Header:","context":{},"level":200,"level_name":"INFO","channel":"local","datetime":"2024-07-14T18:56:01.576560+02:00","extra":{}}
+  2024-07-15 01:01:08 App\Notifications\WelcomeEmailNotification ..... RUNNING
+  2024-07-15 01:01:08 App\Notifications\UserCreatedKafkaNotification . RUNNING
+  2024-07-15 01:01:08 App\Notifications\UserCreatedKafkaNotification  20.10ms DONE
+  2024-07-15 01:01:10 App\Notifications\WelcomeEmailNotification ..... 2s DONE
+  2024-07-15 01:57:45 App\Notifications\WelcomeEmailNotification ..... RUNNING
+  2024-07-15 01:57:45 App\Notifications\UserCreatedKafkaNotification . RUNNING
+  2024-07-15 01:57:45 App\Notifications\UserCreatedKafkaNotification  24.05ms DONE
+  2024-07-15 01:57:47 App\Notifications\WelcomeEmailNotification ..... 2s DONE
+{"message":"Header:","context":{},"level":200,"level_name":"INFO","channel":"local","datetime":"2024-07-15T03:07:57.087552+01:00","extra":{}}
+{"message":"Header:","context":{},"level":200,"level_name":"INFO","channel":"local","datetime":"2024-07-15T16:08:49.096264+01:00","extra":{}}
+{"message":"Header:","context":{},"level":200,"level_name":"INFO","channel":"local","datetime":"2024-07-15T16:15:29.490652+01:00","extra":{}}
+{"message":"Header:","context":{},"level":200,"level_name":"INFO","channel":"local","datetime":"2024-07-15T16:22:42.626187+01:00","extra":{}}
+{"message":"Header:","context":{},"level":200,"level_name":"INFO","channel":"local","datetime":"2024-07-15T19:56:52.983371+01:00","extra":{}}
+{"message":"Header:","context":{},"level":200,"level_name":"INFO","channel":"local","datetime":"2024-07-15T20:08:30.533684+01:00","extra":{}}
+{"message":"Header:","context":{},"level":200,"level_name":"INFO","channel":"local","datetime":"2024-07-15T20:16:45.875508+01:00","extra":{}}
+{"message":"Header:","context":{},"level":200,"level_name":"INFO","channel":"local","datetime":"2024-07-15T20:26:52.752954+01:00","extra":{}}
+  2024-07-15 22:13:48 App\Notifications\WelcomeEmailNotification ..... RUNNING
+  2024-07-15 22:13:50 App\Notifications\WelcomeEmailNotification ..... 2s DONE
+  2024-07-15 22:13:50 App\Notifications\UserCreatedKafkaNotification . RUNNING
+  2024-07-15 22:13:50 App\Notifications\UserCreatedKafkaNotification  58.02ms DONE
+  2024-07-16 00:48:11 App\Notifications\WelcomeEmailNotification ..... RUNNING
+  2024-07-16 00:48:13 App\Notifications\WelcomeEmailNotification ..... 1s DONE
+  2024-07-16 00:48:13 App\Notifications\UserCreatedKafkaNotification . RUNNING
+  2024-07-16 00:48:13 App\Notifications\UserCreatedKafkaNotification  12.99ms DONE
+  2024-07-16 01:04:02 App\Notifications\WelcomeEmailNotification ..... RUNNING
+  2024-07-16 01:04:04 App\Notifications\WelcomeEmailNotification ..... 1s DONE
+  2024-07-16 01:04:04 App\Notifications\UserCreatedKafkaNotification . RUNNING
+  2024-07-16 01:04:04 App\Notifications\UserCreatedKafkaNotification  16.57ms DONE
+  2024-07-23 19:29:30 App\Notifications\WelcomeEmailNotification ..... RUNNING
+  2024-07-23 19:29:32 App\Notifications\WelcomeEmailNotification ..... 2s DONE
+  2024-07-23 19:29:32 App\Notifications\UserCreatedKafkaNotification . RUNNING
+  2024-07-23 19:29:32 App\Notifications\UserCreatedKafkaNotification  47.92ms DONE
+  2024-07-23 19:30:14 App\Notifications\WelcomeEmailNotification ..... RUNNING
+  2024-07-23 19:30:15 App\Notifications\WelcomeEmailNotification  484.50ms DONE
+  2024-07-23 19:30:15 App\Notifications\UserCreatedKafkaNotification . RUNNING
+  2024-07-23 19:30:15 App\Notifications\UserCreatedKafkaNotification  15.12ms DONE
+  2024-08-21 00:06:49 App\Notifications\WelcomeEmailNotification ..... RUNNING
+  2024-08-21 00:06:56 App\Notifications\WelcomeEmailNotification ..... 7s FAIL
+{"message":"Error: Symfony\\Component\\Mailer\\Exception\\TransportException :: Failed to authenticate on SMTP server with username \"api\" using the following authenticators: \"LOGIN\", \"PLAIN\". Authenticator \"LOGIN\" returned \"Expected response code \"235\" but got code \"535\", with message \"535 5.7.8 Authentication failed\".\". Authenticator \"PLAIN\" returned \"Expected response code \"235\" but got code \"535\", with message \"535 5.7.8 Authentication failed\".\". in /var/www/html/vendor/symfony/mailer/Transport/Smtp/EsmtpTransport.php on line 242","context":{},"level":400,"level_name":"ERROR","channel":"local","datetime":"2024-08-20T23:06:57.409131+01:00","extra":{}}
+  2024-08-21 00:06:57 App\Notifications\UserCreatedKafkaNotification . RUNNING
+  2024-08-21 00:06:59 App\Notifications\UserCreatedKafkaNotification . 2s DONE
+  2024-08-21 02:36:58 App\Notifications\WelcomeEmailNotification ..... RUNNING
+  2024-08-21 02:37:03 App\Notifications\WelcomeEmailNotification ..... 5s FAIL
+{"message":"Error: Symfony\\Component\\Mailer\\Exception\\TransportException :: Failed to authenticate on SMTP server with username \"api\" using the following authenticators: \"LOGIN\", \"PLAIN\". Authenticator \"LOGIN\" returned \"Expected response code \"235\" but got code \"535\", with message \"535 5.7.8 Authentication failed\".\". Authenticator \"PLAIN\" returned \"Expected response code \"235\" but got code \"535\", with message \"535 5.7.8 Authentication failed\".\". in /var/www/html/vendor/symfony/mailer/Transport/Smtp/EsmtpTransport.php on line 242","context":{},"level":400,"level_name":"ERROR","channel":"local","datetime":"2024-08-21T01:37:03.900889+01:00","extra":{}}
+  2024-08-21 05:07:05 App\Notifications\WelcomeEmailNotification ..... RUNNING
+  2024-08-21 05:07:11 App\Notifications\WelcomeEmailNotification ..... 6s FAIL
+{"message":"Error: ArgumentCountError :: Too few arguments to function App\\Notifications\\WelcomeEmailNotification::failed(), 1 passed in /var/www/html/vendor/laravel/framework/src/Illuminate/Notifications/SendQueuedNotifications.php on line 141 and exactly 2 expected in /var/www/html/app/Notifications/WelcomeEmailNotification.php on line 63","context":{},"level":400,"level_name":"ERROR","channel":"local","datetime":"2024-08-21T04:07:11.639370+01:00","extra":{}}
+{"message":"Error: Illuminate\\Database\\QueryException :: SQLSTATE[HY000] [2002] Connection refused (Connection: mysql, SQL: select * from `cache` where `key` = illuminate:queue:restart limit 1) in /var/www/html/vendor/laravel/framework/src/Illuminate/Database/Connection.php on line 813","context":{},"level":400,"level_name":"ERROR","channel":"local","datetime":"2024-08-21T19:45:24.830939+01:00","extra":{}}
+

@@ -4,10 +4,14 @@ namespace App\Http\Resources;
 
 use Carbon\Carbon;
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\JsonResource;
-use Illuminate\Support\Facades\Log;
 use Tymon\JWTAuth\Facades\JWTAuth;
 
+/**
+ * @property int $id
+ * @property string $email
+ * @property string $username
+ * @property string $full_name
+ */
 class UserLoginResource extends BaseResource
 {
     /**
@@ -22,35 +26,42 @@ class UserLoginResource extends BaseResource
                 'id' => $this->id,
                 'email' => $this->email,
                 'username' => $this->username,
-                'full_name' => $this->full_name
+                'full_name' => $this->full_name,
             ],
-            'token' =>  $this->getToken()
+            'token' => $this->getToken(),
         ];
     }
 
     protected function getToken(): array
     {
         try {
-            $token = JWTAuth::fromUser($this->resource);
+            $decodedToken = [];
+            // Include email as a custom claim
+            $customClaims = [
+                'email' => $this->resource->email,
+                'user_id' => $this->resource->id,
+            ];
+            $token = JWTAuth::claims($customClaims)->fromUser($this->resource);
+
             $decodedToken = JWTAuth::setToken($token)->getPayload()->toArray();
             $expirationDate = Carbon::createFromTimestamp($decodedToken['exp']);
             $issuedAt = Carbon::createFromTimestamp($decodedToken['iat']);
-            
+
             return [
                 'access_token' => $token,
                 'expires_at' => $expirationDate->toDateTimeString(),
-                'issued_at' => $issuedAt->toDateTimeString()
+                'issued_at' => $issuedAt->toDateTimeString(),
             ];
         } catch (\Exception $e) {
             // Handle parsing errors, such as if the token is invalid or expired
             return [
-                'error' => 'Failed to parse token: ' . $e->getMessage() . json_encode($decodedToken)
+                'error' => 'Failed to parse token: '.$e->getMessage().json_encode($decodedToken),
             ];
         }
     }
 
     protected function message()
     {
-        return "User data retrieved successfully.";
+        return 'User data retrieved successfully.';
     }
 }
