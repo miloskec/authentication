@@ -1,10 +1,12 @@
-<?php declare(strict_types=1);
+<?php
+
+declare(strict_types=1);
 
 return [
     /*
      | Your kafka brokers url.
      */
-    'brokers' => env('KAFKA_BROKERS', 'localhost:9092'),
+    'brokers' => env('KAFKA_BROKERS', 'kafka-service:9092'),
 
     /*
      | The kafka topics
@@ -17,15 +19,15 @@ return [
     /*
      | Default security protocol
      */
-    'securityProtocol' =>  env('KAFKA_SECURITY_PROTOCOL', 'PLAINTEXT'),
+    'securityProtocol' => env('KAFKA_SECURITY_PROTOCOL', 'PLAINTEXT'),
 
     /*
-     | Default sasl configuration 
+     | Default sasl configuration
      */
     'sasl' => [
         'mechanisms' => env('KAFKA_MECHANISMS', 'PLAINTEXT'),
         'username' => env('KAFKA_USERNAME', null),
-        'password' => env('KAFKA_PASSWORD', null)
+        'password' => env('KAFKA_PASSWORD', null),
     ],
 
     /*
@@ -36,7 +38,7 @@ return [
      */
     'consumer_group_id' => env('KAFKA_CONSUMER_GROUP_ID', 'group'),
 
-    'consumer_timeout_ms' => env("KAFKA_CONSUMER_DEFAULT_TIMEOUT", 2000),
+    'consumer_timeout_ms' => env('KAFKA_CONSUMER_DEFAULT_TIMEOUT', 2000),
 
     /*
      | After the consumer receives its assignment from the coordinator,

@@ -3,8 +3,15 @@
 namespace App\Http\Resources;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Resources\Json\JsonResource;
 
+/**
+ * @property int $id
+ * @property string $email
+ * @property string $username
+ * @property string $full_name
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ */
 class UserResource extends BaseResource
 {
     /**
@@ -26,6 +33,6 @@ class UserResource extends BaseResource
 
     protected function message()
     {
-        return "User data retrieved successfully.";
+        return 'User data retrieved successfully.';
     }
 }
