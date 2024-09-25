@@ -31,24 +31,6 @@ apt-get install -y \
     php-dev \
     librdkafka-dev
 
-# Check if confluent-platform is already installed
-#if ! dpkg -s confluent-platform >/dev/null 2>&1; then
-#    echo "Downloading confluent... adding key"
-#    wget -qO - https://packages.confluent.io/deb/7.6/archive.key | gpg --dearmor -o /usr/share/keyrings/confluent-archive-keyring.gpg
-#
-#    echo "Adding repositories..."
-#    echo "deb [signed-by=/usr/share/keyrings/confluent-archive-keyring.gpg] https://packages.confluent.io/deb/7.6 stable main" >/etc/apt/sources.list.d/confluent.list
-#    echo "deb [signed-by=/usr/share/keyrings/confluent-archive-keyring.gpg] https://packages.confluent.io/clients/deb $(lsb_release -cs) main" >>/etc/apt/sources.list.d/confluent.list
-
-#    echo "Updating..."
-#    apt-get update
-
-#    #echo "confluent-platform not installed. Installing..."
-#    #apt-get install -y confluent-platform
-#else
-#    echo "confluent-platform is already installed."
-#fi
-
 # Clear PECL cache if it exists
 echo "Clearing cache..."
 if [ -d "/tmp/pear/cache" ]; then
