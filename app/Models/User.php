@@ -9,11 +9,26 @@ use App\Notifications\WelcomeEmailNotification;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Str;
+use Spatie\Activitylog\LogOptions;
+use Spatie\Activitylog\Models\Activity;
+use Spatie\Activitylog\Traits\LogsActivity;
 use Tymon\JWTAuth\Contracts\JWTSubject;
 
+/**
+ * @property int $id
+ * @property string $email
+ * @property string $username
+ * @property string $full_name
+ * @property string $password_hash
+ * @property bool $is_admin
+ * @property \Carbon\Carbon $created_at
+ * @property \Carbon\Carbon $updated_at
+ */
 class User extends Authenticatable implements JWTSubject
 {
-    use HasFactory, Notifiable;
+    use HasFactory, LogsActivity, Notifiable;
 
     /**
      * The attributes that are mass assignable.
@@ -25,7 +40,7 @@ class User extends Authenticatable implements JWTSubject
         'full_name',
         'email',
         'password_hash',
-        'is_admin'
+        'is_admin',
     ];
 
     /**
@@ -51,6 +66,19 @@ class User extends Authenticatable implements JWTSubject
         ];
     }
 
+    /**
+     * Get the activity log options for the model.
+     */
+    public function getActivitylogOptions(): LogOptions
+    {
+        return LogOptions::defaults()
+            ->logAll() // Logs all attributes
+            ->logOnlyDirty()
+            ->dontLogIfAttributesChangedOnly(['password']) // Avoid logging if only password is changed
+            ->useLogName('user')
+            ->setDescriptionForEvent(fn (string $eventName) => "User has been {$eventName}");
+    }
+
     protected static function boot()
     {
         parent::boot();
@@ -58,10 +86,10 @@ class User extends Authenticatable implements JWTSubject
         // Attach an event listener to the 'created' event
         static::created(function ($user) {
             $user->notify(new WelcomeEmailNotification());
-            $user->notify(new UserCreatedKafkaNotification($user));
+            $user->notify(new UserCreatedKafkaNotification());
         });
     }
-    
+
     public function getAuthPassword()
     {
         return $this->password_hash;
@@ -77,5 +105,18 @@ class User extends Authenticatable implements JWTSubject
     public function getJWTCustomClaims()
     {
         return [];
+    }
+
+    // Example method to create a password reset token
+    public function createPasswordResetToken()
+    {
+        $token = Str::random(60);
+        DB::table('password_resets')->insert([
+            'email' => $this->email,
+            'token' => $token,
+            'created_at' => now(),
+        ]);
+
+        return $token;
     }
 }
