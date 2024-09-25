@@ -13,6 +13,7 @@ class WelcomeEmailNotification extends Notification implements ShouldQueue
     use Queueable;
 
     public $tries = 3;  // Number of attempts
+
     public $backoff = 9000;  // Delay in seconds (150 minutes)
 
     /**
@@ -40,7 +41,7 @@ class WelcomeEmailNotification extends Notification implements ShouldQueue
     {
         return (new MailMessage)
             ->subject('Welcome to Our Application!')
-            ->greeting('Hello ' . $notifiable->full_name . ',')
+            ->greeting('Hello '.$notifiable->full_name.',')
             ->line('Thank you for registering at our site.')
             ->line('We are glad to have you in our community.')
             ->action('Visit Our Website', url('/'))

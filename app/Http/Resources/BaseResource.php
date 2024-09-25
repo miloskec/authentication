@@ -9,14 +9,14 @@ class BaseResource extends JsonResource
     /**
      * Add data to the resource response.
      *
-     * @param \Illuminate\Http\Request $request
+     * @param  \Illuminate\Http\Request  $request
      * @return array
      */
     public function with($request)
     {
         return [
             'status' => 'success',
-            'message' => $this->message()
+            'message' => $this->message(),
         ];
     }
 
